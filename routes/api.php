@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\MyItemsController;
 use App\Http\Controllers\OrderController;
+use App\Models\Item;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,10 +29,12 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/logout', [UserController::class, 'logout']);
     
     // Items
+    // Route::get('/items/{item}', function(Item $item){
+    //     return $item;
+    // });//get a single item
     Route::controller(ItemsController::class)->group(function(){
 
-        // Route::get('/items/{item}', 'show');//get a single item
-        Route::get('/items/{item}/orders',  'show'); // see interested buyers on items
+        Route::get('/items/{item}/orders',  'show'); //see interested buyers on items
         Route::post('/items', 'store');//create an item
         Route::delete('/items/{item}', 'destroy');//delete an item
     });
